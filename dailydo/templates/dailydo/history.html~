@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	</head>
+
+	<body >
+
+		<div data-role="page" id="pageone" data-theme="b">
+
+			<div data-role="header"  style=" height: 130px;">
+				<h1 style="font-size: 250%; color: #99cc00">Be Better</h1>
+
+				<div data-role="navbar">
+					<ul>
+					<li><a href="/bebetter/yesterday/" style="font-size: 120%;">Yesterday's activities</a></li>
+					<li><a href="/bebetter/" style="font-size: 120%;">Today's activities</a></li>
+					<li><a href="/bebetter/authenticate/" style="color:#a89e34; font-size: 120%;">History</a></li>
+
+					</ul>
+				</div>
+
+			</div>
+
+
+
+			<div data-role="main" class="ui-content">
+
+
+
+
+
+				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+				<form action="/bebetter/show_history/" method="post">
+					{% csrf_token %}
+					<center>
+						<div data-role="fieldcontain" data-content-theme="b">
+								<select  name='month' id='month' >
+
+									{% if month == "1" %}
+										<option value="1" selected> Jan </option>
+									{% else %}
+										<option value="1"> Jan</option>
+									{% endif %}				
+
+									{% if month == "2" %}
+										<option value="2" selected> Feb</option>
+									{% else %}
+										<option value="2"> Feb</option>
+									{% endif %}
+
+									{% if month == "3" %}
+										<option value="3" selected> Mar</option>
+									{% else %}
+										<option value="3"> Mar</option>
+									{% endif %} 
+
+									{% if month == "4" %}
+										<option value="4" selected> Apr</option>
+									{% else %}
+										<option value="4"> Apr</option>
+									{% endif %}
+
+									{% if month == "5" %}
+										<option value="5" selected> May</option>
+									{% else %}
+										<option value="5"> May</option>
+									{% endif %}
+
+									{% if month == "6" %}
+										<option value="6" selected> Jun</option>
+									{% else %}
+										<option value="6"> Jun</option>
+									{% endif %}
+
+									{% if month == "7" %}
+										<option value="7" selected> Jul</option>
+									{% else %}
+										<option value="7"> Jul</option>
+									{% endif %}
+
+									{% if month == "8" %}
+										<option value="8" selected> Aug</option>
+									{% else %}
+										<option value="8"> Aug</option>
+									{% endif %}
+									{% if month == "9" %}
+										<option value="9" selected> Sep</option>
+									{% else %}
+										<option value="9"> Sep</option>
+									{% endif %}
+									{% if month == "10" %}
+										<option value="10" selected> Oct</option>
+									{% else %}
+										<option value="10"> Oct</option>
+									{% endif %}
+									{% if month == "11" %}
+										<option value="11" selected> Nov</option>
+									{% else %}
+										<option value="11"> Nov</option>
+									{% endif %}
+									{% if month == "12" %}
+										<option value="12" selected> Dec</option>
+									{% else %}
+										<option value="12"> Dec</option>
+									{% endif %}
+								</select>
+						</div>							
+						<div data-role="fieldcontain" data-content-theme="b">
+								<select  name='year' id='year' >
+
+									<option value= {{ year|add:"-5" }}>  {{ year|add:"-5" }}</option>
+									<option value= {{ year|add:"-4" }}>  {{ year|add:"-4" }}</option>
+									<option value= {{ year|add:"-3" }}>  {{ year|add:"-3" }}</option>
+									<option value= {{ year|add:"-2" }}>  {{ year|add:"-2" }}</option>
+									<option value= {{ year|add:"-1" }}>  {{ year|add:"-1" }}</option>
+									<option value= {{ year}} selected>  {{ year }}</option>
+									<option value= {{ year|add:"1" }}>  {{ year|add:"1" }}</option>
+									<option value= {{ year|add:"2" }}>  {{ year|add:"2" }}</option>
+									<option value= {{ year|add:"3" }}>  {{ year|add:"3" }}</option>
+									<option value= {{ year|add:"4" }}>  {{ year|add:"4" }}</option>
+									<option value= {{ year|add:"5" }}>  {{ year|add:"5" }}</option>
+
+								 </select>                
+						</div>	
+						<div data-role="fieldcontain">					
+
+							<label for="acty_list3">Selected Activities</label>
+							<select name="acty_list3" id="acty_list3" multiple="multiple" data-native-menu="false" >	
+								<option>Select Activities</option>
+								<option value="gratitude" {% if 'gratitude' in acty_list or disp_type == 'first' %} selected="selected" {% endif %} >Gratitude</option>
+								<option value="positive_exp" {% if 'positive_exp' in acty_list or disp_type == 'first' %} selected="selected" {% endif %} >Positive Experience</option>
+							<option value="exercise" {% if 'exercise' in acty_list  or disp_type == 'first'  %} selected="selected" {% endif %}>Exercise</option>
+							<option value="meditation" {% if 'meditation' in acty_list  or disp_type == 'first'  %} selected="selected" {% endif %} >Meditation</option>
+							<option value="kind_act" {% if 'kind_act' in acty_list  or disp_type == 'first' %} selected="selected" {% endif %} >Act of Kindness</option>
+
+
+						</select>
+
+						</div>
+						<input type="submit" value="Go" data-inline="true">
+					</center>
+				</form>
+
+
+				{% if history_list %}
+					{% for entry in history_list %}
+							<div data-role="collapsible" data-collapsed="false">
+							<h1>{{ entry.date_info_date }}</h1>
+								{% if 'gratitude' in acty_list or disp_type == 'first' %}
+									{% if entry.gratitude1_text != "" or entry.gratitude2_text != "" or entry.gratitude3_text != "" %}
+									<div data-role="collapsible" data-collapsed="false" data-content-theme="b">
+										<h1>Gratitude</h1>
+										<p>{{ entry.gratitude1_text }}</p>
+										<p>{{ entry.gratitude2_text }}</p>
+										<p>{{ entry.gratitude3_text }}</p>
+
+									</div>
+									{% endif %}
+								{% endif %}	  
+								{% if 'positive_exp' in acty_list or disp_type == 'first' %}
+									{% if entry.positive_exp_text != "" %}
+									<div data-role="collapsible" data-collapsed="false">
+										<h1>Positive Experience</h1>
+										<p>{{ entry.positive_exp_text }}</p>
+
+									</div>
+									{% endif %}
+								{% endif %}	  
+								{% if 'exercise' in acty_list  or disp_type == 'first'  %}
+									<div data-role="collapsible" data-collapsed="false">
+										<h1>Exercise</h1>
+										<p>
+										{% if entry.exercise_bool == True %}
+										    Done
+										{% else %}
+										    Not Done
+										{% endif %}
+										</p>
+
+									</div>
+								{% endif %}	  
+								{% if 'meditation' in acty_list  or disp_type == 'first'  %}
+									<div data-role="collapsible" data-collapsed="false">
+										<h1>Meditation</h1>
+										<p>
+										{% if entry.meditation_bool == True %}
+											Done
+										{% else %}
+											Not Done
+										{% endif %}
+										</p>
+									</div>
+								{% endif %}	  
+								{% if 'kind_act' in acty_list  or disp_type == 'first' %}
+									{% if entry.kind_act_text != "" %}
+									<div data-role="collapsible" data-collapsed="false">
+										<h1>Act of kindness</h1>
+										<p>{{ entry.kind_act_text }}</p>
+	
+									</div>
+									{% endif %}	  
+								{% endif %}	  
+							</div>
+
+					{% endfor %}
+
+				{% else %}
+					No activities done
+				{% endif %}
+
+			</div>
+
+			<div data-role="footer">
+					<h1>Copyright &copy; Nageshwari Elango</h1>
+
+			</div> 
+		</div>
+	</body>
+</html>

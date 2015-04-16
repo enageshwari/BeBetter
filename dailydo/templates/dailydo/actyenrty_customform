@@ -1,0 +1,153 @@
+ <table>
+                        <tr><th><label for="id_gratitude1_text">Gratitude</label></th><td><input id="id_gratitude1_text" maxlength="500" name="gratitude1_text" type="text" value="k" /></td></tr>
+<tr><th><label for="id_gratitude2_text"> </label></th><td><input id="id_gratitude2_text" maxlength="500" name="gratitude2_text" type="text" /></td></tr>
+<tr><th><label for="id_gratitude3_text"> </label></th><td><input id="id_gratitude3_text" maxlength="500" name="gratitude3_text" type="text" value="k" /></td></tr>
+<tr><th><label for="id_positive_exp_text">Positive Experience</label></th><td><input id="id_positive_exp_text" maxlength="500" name="positive_exp_text" type="text" /></td></tr>
+<tr><th><label for="id_exercise_bool">Exercise</label></th><td><input id="id_exercise_bool" name="exercise_bool" type="checkbox" /></td></tr>
+<tr><th><label for="id_meditation_bool">Meditation</label></th><td><input id="id_meditation_bool" name="meditation_bool" type="checkbox" /></td></tr>
+<tr><th><label for="id_kind_act_text">Act of Kindness</label></th><td><input id="id_kind_act_text" maxlength="500" name="kind_act_text" type="text" /><input id="id_date_info_date" name="date_info_date" type="hidden" value="2015-04-07" /></td></tr>
+                        </table>
+
+
+
+
+
+===============
+
+                        <p><label for="id_gratitude1_text">Gratitude</label></p>
+                        <input id="id_gratitude1_text" maxlength="500" name="gratitude1_text" type="text" value= {{ activity_form.gratitude1_text.value }} > </input>
+                        <p><label for="id_gratitude2_text"> </label></p>
+                        <input id="id_gratitude2_text" maxlength="500" name="gratitude2_text" type="text" value= {{ activity_form.gratitude2_text.value }} > </input>
+                        <p><label for="id_gratitude3_text"> </label></p>
+                        <input id="id_gratitude3_text" maxlength="500" name="gratitude3_text" type="text" value= {{ activity_form.gratitude3_text.value }} > </input>
+                        <p><label for="id_positive_exp_text">Positive Experience</label></p>
+                        <input id="id_positive_exp_text" maxlength="500" name="positive_exp_text" type="text" value= {{ activity_form.positive_exp_text.value }} > </input>
+                        <p><label for="id_exercise_bool">Exercise</label></p>
+                        <input id="id_exercise_bool" name="exercise_bool" type="checkbox" {% if activity_form.exercise_bool.value == True %} checked="checked" {% endif %}> </input>
+                        <p><label for="id_meditation_bool">Meditation</label></p>
+                        <input id="id_meditation_bool" name="meditation_bool" type="checkbox" {% if activity_form.meditation_bool.value == True %} checked="checked" {% endif %}> </input>
+                        <p><label for="id_kind_act_text">Act of Kindness</label></p>
+                        <input id="id_kind_act_text" maxlength="500" name="kind_act_text" type="text" value = {{ activity_form.kind_act_text.value }} > </input>
+
+                        <input id="id_date_info_date" name="date_info_date" type="hidden" value={{ activity_form.date_info_date.value }} > </input>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 						<!--<div class="ui-field-contain">
+
+                        {{ activity_form.non_field_errors }}
+<div class="fieldWrapper">
+    {{ activity_form.gratitude1_text.errors }}
+                        {{ activity_form.gratitude1_text.label_tag }}
+                        {{ activity_form.gratitude1_text }}
+                        </div>
+
+<div class="fieldWrapper">                        {{ activity_form.gratitude2_text.errors }}
+                        {{ activity_form.gratitude2_text.label_tag }}
+                        {{ activity_form.gratitude2_text }}
+                        </div>
+
+<div class="fieldWrapper">                        {{ activity_form.gratitude3_text.errors }}
+                        {{ activity_form.gratitude3_text.label_tag }}
+                        {{ activity_form.gratitude3_text }}
+                        </div>
+
+<div class="fieldWrapper">                        {{ activity_form.positive_exp_text.errors }}
+                        {{ activity_form.positive_exp_text.label_tag }}
+                        {{ activity_form.positive_exp_text }}
+                        </div>
+
+<div class="fieldWrapper">                        {{ activity_form.exercise_bool.errors }}
+                        {{ activity_form.exercise_bool.label_tag }}
+                        {{ activity_form.exercise_bool }}
+                        </div>
+
+<div class="fieldWrapper">                        {{ activity_form.meditation_bool.errors }}
+                        {{ activity_form.meditation_bool.label_tag }}
+                        {{ activity_form.meditation_bool }}
+                        </div>
+
+<div class="fieldWrapper">                        {{ activity_form.kind_act_text.errors }}
+                        {{ activity_form.kind_act_text.label_tag }}
+                        {{ activity_form.kind_act_text }}
+                        </div>
+
+<!--
+						<div class="ui-field-contain">
+
+							<div data-role="fieldcontain">
+								<label for="grat1_idn">{{ activity_form.gratitude1_text.label_tag}} </label>
+
+									<textarea name="grat1_idn" id="grat1_idn"> {{ activity_form.gratitude1_text.value }}</textarea>
+							</div>
+
+
+							<br>
+							<div data-role="fieldcontain">
+								<label for="grat2_idn">{{ activity_form.gratitude2_text.label_tag  }} </label>
+
+									<textarea name="grat2_idn" id="grat2_idn"> {{ activity_form.gratitude2_text.value }}</textarea>
+
+							</div>
+
+							<br>
+							<div data-role="fieldcontain">
+								<label for="grat3_idn">{{ activity_form.gratitude3_text.label_tag  }} </label>
+
+									<textarea name="grat3_idn" id="grat3_idn"> {{ activity_form.gratitude3_text.value }}</textarea>
+
+							</div>
+
+							<br>
+							<div data-role="fieldcontain">
+								<label for="pos_think_idn">{{ activity_form.positive_think_text.label_tag  }}</label>
+
+									<textarea name="pos_think_idn" id="pos_think_idn"> {{ activity_form.positive_think_text.value }}</textarea>
+							</div>
+
+
+							<br>
+							<div data-role="fieldcontain">
+								<label for="exer_idn">{{ activity_form.exercise_bool.label_tag }}</label>
+	<!--							{% if activity_form.exercise_bool.value == True %}
+									<input type="checkbox" data-role="flipswitch" name="exer_idn" id="exer_idn"  data-wrapper-class="custom-size-flipswitch" data-on-text="Done" data-off-text="No" checked>
+								{% else %}
+									<input type="checkbox" data-role="flipswitch" name="exer_idn" id="exer_idn"  data-wrapper-class="custom-size-flipswitch" data-on-text="Done" data-off-text="No">
+			<!--					{% endif %}
+							</div>
+
+							<br>
+							<div data-role="fieldcontain">
+								<label for="medi_idn">{{ activity_form.meditation_bool.label_tag }}</label>
+					<!--			{% if activity_form.meditation_bool.value == True %}
+									<input type="checkbox" data-role="flipswitch" data-wrapper-class="custom-size-flipswitch" name="medi_idn" id="medi_idn"  data-on-text="Done" data-off-text="No" checked>
+								{% else %}
+									<input type="checkbox" data-role="flipswitch" data-wrapper-class="custom-size-flipswitch" name="medi_idn" id="medi_idn"  data-on-text="Done" data-off-text="No">
+							<!--	{% endif %}
+							</div>
+
+							<br>
+							<div data-role="fieldcontain">
+								<label for="learnew_idn">{{ activity_form.learn_new_text.label_tag }} </label>
+
+									<textarea name="learnew_idn" id="learnew_idn"> {{ activity_form.learn_new_text.value }}</textarea>
+							</div>
+
+						</div>

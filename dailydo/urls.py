@@ -1,0 +1,14 @@
+from django.conf.urls import url
+
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.activity_entry, name='index'),
+    url(r'^yesterday/$', 'dailydo.views.yesterday'),
+    url(r'^save/$', 'dailydo.views.save'),
+    url(r'^save_yest/$', 'dailydo.views.save_yest'),
+    url(r'^disp/$','dailydo.views.disp'),
+    url(r'^history/$','dailydo.views.history'),
+    url(r'^show_history/$','dailydo.views.show_history'),
+    url(r'^authenticate/$','dailydo.views.authenticate'),
+]

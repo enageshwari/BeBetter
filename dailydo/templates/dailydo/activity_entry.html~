@@ -1,0 +1,101 @@
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+		<style>
+		/* Custom indentations are needed because the length of custom labels differs from
+		   the length of the standard labels */
+		.custom-size-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on {
+		    text-indent: -4em;
+		}
+		.custom-size-flipswitch.ui-flipswitch .ui-flipswitch-off {
+		    text-indent: 2em;
+		}
+		/* Custom widths are needed because the length of custom labels differs from
+		   the length of the standard labels */
+		.custom-size-flipswitch.ui-flipswitch {
+		    width: 8.875em;
+		}
+		.custom-size-flipswitch.ui-flipswitch.ui-flipswitch-active {
+		    padding-left: 7em;
+		    width: 1.87em;
+		}
+		</style>
+	</head>
+
+	<body>
+		<div data-role="page" id="pageone" data-theme="b">
+
+			<div data-role="header"  style=" height: 130px;" >
+				<h1 style="font-size: 250%; color: #99cc00">Be Better</h1>
+
+				<div data-role="navbar" >
+					<ul>
+					<li><a href="/bebetter/yesterday/" style="font-size: 120%;">Yesterday's activities</a></li>
+					<li><a href="/bebetter/" style="color:#a89e34; font-size: 120%;">Today's activities</a></li>
+					<li><a href="/bebetter/authenticate/" style="font-size: 120%;">History</a></li>
+
+					</ul>
+				</div>
+
+			</div>
+
+
+
+			<div data-role="main" class="ui-content">
+				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+				{{ activity_form.date_info_date.value }}
+				<center>
+					<form action="/bebetter/save/" method="post">
+
+
+
+					{% csrf_token %}
+<!-- {{ activity_form.as_table }} -->
+
+
+                        <p><label for="id_gratitude1_text">Gratitude</label></p>
+
+                       						<textarea cols="40" rows="8" id="id_gratitude1_text" maxlength="500" name="gratitude1_text">{% if activity_form.gratitude1_text.value != None %}{{activity_form.gratitude1_text.value}}{% endif %}</textarea>
+						<p><label for="id_gratitude2_text"> </label></p>
+						<textarea cols="40" rows="8" id="id_gratitude2_text" maxlength="500" name="gratitude2_text" >{% if activity_form.gratitude2_text.value != None %}{{activity_form.gratitude2_text.value}}{% endif %}</textarea>
+						<p><label for="id_gratitude3_text"> </label></p>
+						<textarea cols="40" rows="8" id="id_gratitude3_text" maxlength="500" name="gratitude3_text" >{% if activity_form.gratitude3_text.value != None %}{{activity_form.gratitude3_text.value}}{% endif %}</textarea>
+						<p><label for="id_positive_exp_text">Positive Experience</label></p>
+						<textarea cols="40" rows="8" id="id_positive_exp_text" maxlength="500" name="positive_exp_text" >{% if activity_form.positive_exp_text.value != None %}{{activity_form.positive_exp_text.value}}{% endif %}</textarea>
+
+  
+
+                                            <label for="id_exercise_bool">Exercise</label>
+
+                                    <input id="id_exercise_bool" name="exercise_bool" data-role="flipswitch" data-wrapper-class="custom-size-flipswitch" data-on-text="Done" data-off-text="No" type="checkbox" {% if activity_form.exercise_bool.value == True %} checked="checked" {% endif %}>
+                              
+                               
+                                   <label for="id_meditation_bool">Meditation</label>
+                   
+                                    <input id="id_meditation_bool" name="meditation_bool"  data-role="flipswitch" data-wrapper-class="custom-size-flipswitch" data-on-text="Done" data-off-text="No"  type="checkbox" {% if activity_form.meditation_bool.value == True %} checked="checked" {% endif %}>
+    
+                        <p><label for="id_kind_act_text">Act of Kindness</label></p>
+
+                       <textarea cols="40" rows="8" id="id_kind_act_text" maxlength="500" name="kind_act_text" >{% if activity_form.kind_act_text.value != None %}{{activity_form.kind_act_text.value}}{% endif %}</textarea>
+
+                        <input id="id_date_info_date" name="date_info_date" type="hidden" value={{today_date}} />
+
+
+                        <input type="submit" value="Save" data-inline="true" />
+					</form>
+				</center>
+            </div>
+
+
+			<div data-role="footer">
+				<h1>Copyright &copy; Nageshwari Elango</h1>
+			</div>
+		</div> 
+	</body>
+</html>
